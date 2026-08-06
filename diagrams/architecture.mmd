@@ -15,8 +15,11 @@ Confidence["Confidence Scoring"]
 Logger["Application Logger"]
 
 Output["Recommendations
-+ Explanation
-+ Confidence"]
++ Explanations
++ Confidence Score"]
+
+Testing["PyTest &
+Reliability Testing"]
 
 User --> Guardrails
 Guardrails --> Retriever
@@ -24,3 +27,5 @@ Retriever --> Engine
 Engine --> Confidence
 Confidence --> Logger
 Logger --> Output
+
+Testing -. verifies .-> Engine
