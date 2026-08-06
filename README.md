@@ -296,5 +296,12 @@ Read and complete `model_card.md`:
 
 This project demonstrated how a simple AI recommender can be extended into a more complete Applied AI system. Adding retrieval, validation, logging, and confidence scoring made the recommender more transparent, reliable, and easier to evaluate. The project reinforced the importance of building AI systems that are not only accurate, but also explainable and reproducible. This project also showed me how retrieval, validation, logging, and confidence scoring can make AI systems more trustworthy and easier to debug.
 
+## Portfolio Reflection
+
+This project demonstrates my ability to build an AI application that goes beyond a basic recommendation algorithm. I extended a content-based music recommender by integrating Retrieval-Augmented Generation (RAG), input validation through guardrails, logging, confidence scoring, testing, and documentation. Throughout the project, I focused on making the system transparent, reliable, and easy to explain. It reflects my approach as an AI engineer: building practical AI systems that are accurate, reproducible, and designed with responsible AI principles in mind.
+
+## GitHub Repository
+
+https://github.com/anoshasharif/applied-ai-music-recommender
 
 
