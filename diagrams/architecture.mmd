@@ -1,0 +1,26 @@
+flowchart LR
+
+User["User Request & Preferences"]
+
+Guardrails["Input Validation
+(Guardrails)"]
+
+Retriever["Retriever (RAG)
+music_knowledge.txt"]
+
+Engine["Recommendation Engine"]
+
+Confidence["Confidence Scoring"]
+
+Logger["Application Logger"]
+
+Output["Recommendations
++ Explanation
++ Confidence"]
+
+User --> Guardrails
+Guardrails --> Retriever
+Retriever --> Engine
+Engine --> Confidence
+Confidence --> Logger
+Logger --> Output

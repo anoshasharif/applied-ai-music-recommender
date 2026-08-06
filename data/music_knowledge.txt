@@ -1,0 +1,26 @@
+# Study
+Lofi music is commonly recommended for studying because it minimizes distractions and maintains a calm atmosphere.
+
+Classical music is often effective for reading, writing, and concentration.
+
+# Workout
+High-energy pop music can improve motivation during exercise.
+
+Rock music with high energy is frequently used for strength training and running.
+
+# Relaxation
+Acoustic songs help create a relaxing environment after work.
+
+Soft jazz is often recommended for reducing stress.
+
+# Happy Mood
+Pop music with high valence and danceability is associated with happier moods.
+
+# Sad Mood
+Blues music often reflects emotional and melancholy themes.
+
+# Driving
+Electronic music with moderate tempo is commonly used for long drives.
+
+# Sleep
+Slow acoustic or classical music may help people relax before sleeping.

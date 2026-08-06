@@ -1,131 +1,117 @@
-# 🎧 Model Card: Music Recommender Simulation
+# 🎧 Model Card: Applied AI Music Recommender System
 
-## 1. Model Name  
+## 1. Model Name
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
-
----
-
-## 2. Intended Use  
-
-Describe what your recommender is designed to do and who it is for. 
-
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+**Applied AI Music Recommender System**
 
 ---
 
-## 3. How the Model Works  
+## 2. Intended Use
 
-Explain your scoring approach in simple language.  
+This system is designed to recommend music based on a user's preferences, including genre, mood, energy level, and acoustic preference. It assumes that the user provides reasonable preference values and that the songs in the local dataset represent the types of music they may enjoy.
 
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
-
-The recommender compares each song's features with the user's preferences. It checks whether the genre and mood match and then compares how close the song's energy level is to the user's preferred energy. Songs that match more of the user's preferences receive higher scores. After every song is scored, the recommender ranks them from highest to lowest and returns the top recommendations along with explanations. Compared to the starter code, I implemented the scoring system, ranking logic, explanations, and CSV loading.
-
+This project was developed as part of a classroom assignment to demonstrate Applied AI concepts rather than to compete with commercial music recommendation systems. In addition to recommending songs, this version demonstrates Retrieval-Augmented Generation (RAG), guardrails, logging, and confidence scoring as part of a complete Applied AI workflow.
 
 ---
 
-## 4. Data  
+## 3. How the Model Works
 
-Describe the dataset the model uses.  
+The recommender compares each song's features with the user's preferences. It checks whether the genre and mood match and compares how closely the song's energy level matches the user's preferred energy. Songs that match more of the user's preferences receive higher scores.
 
-Prompts:  
+Before recommendations are generated, the system retrieves relevant music knowledge from a local knowledge base using Retrieval-Augmented Generation (RAG). The system also validates user input before processing requests, records recommendation activity through logging, and calculates a confidence score for every recommendation.
 
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
-
-The dataset contains **15 songs** stored in `songs.csv`. The songs include genres such as pop, rock, lofi, jazz, EDM, ambient, folk, blues, hip hop, synthwave, and electronic. They also include different moods such as happy, chill, intense, relaxed, focused, energetic, melancholy, and euphoric. I added additional songs to expand the dataset, but it is still small and does not include features like lyrics, listening history, artist popularity, or user ratings.
+Compared to the original Module 3 project, this Applied AI version adds Retrieval-Augmented Generation (RAG), input validation, logging, and confidence scoring to improve transparency and reliability.
 
 ---
 
-## 5. Strengths  
+## 4. Data
 
-Where does your system seem to work well  
+The dataset contains **15 songs** stored in `songs.csv`. The songs include genres such as pop, rock, lofi, jazz, EDM, ambient, folk, blues, hip hop, synthwave, and electronic. They also include different moods such as happy, chill, intense, relaxed, focused, energetic, melancholy, and euphoric.
 
-Prompts:  
+The project also includes a local knowledge base (`music_knowledge.txt`) that provides additional music guidance for situations such as studying, working out, relaxing, sleeping, and driving.
 
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
-
-The recommender works well when a user's preferences closely match songs in the dataset. For example, the High-Energy Pop profile correctly recommended **Sunrise City**, the Chill Lofi profile recommended **Library Rain**, and the Deep Intense Rock profile recommended **Storm Runner**. The scoring system also explains why each song was recommended, making the results easy to understand.
+Although additional songs were added to expand the catalog, the dataset is still relatively small and does not include features such as lyrics, listening history, artist popularity, or user ratings.
 
 ---
 
-## 6. Limitations and Bias 
+## 5. Strengths
 
-Where the system struggles or behaves unfairly. 
+The recommender performs well when a user's preferences closely match songs within the dataset.
 
-Prompts:  
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+For example:
 
-One weakness I discovered is that the recommender relies heavily on genre, mood, and energy while ignoring other important factors such as favorite artists, lyrics, and listening history. Because the dataset only contains 15 songs, some genres and moods have very few choices, which can cause the same songs to appear repeatedly. During my weight-shift experiment, increasing the importance of energy caused songs with similar energy levels to rank highly even when they did not match the user's preferred genre or mood. This shows that the scoring system can create a small filter bubble by repeatedly recommending songs that share the most heavily weighted features.
----
+- High-Energy Pop correctly recommends energetic pop songs.
+- Study-focused users receive lofi recommendations along with retrieved study guidance.
+- Workout requests retrieve exercise-related music knowledge before recommendations are generated.
+- Every recommendation includes an explanation and confidence score to improve transparency.
 
-## 7. Evaluation  
-
-How you checked whether the recommender behaved as expected. 
-
-Prompts:  
-
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
-
-No need for numeric metrics unless you created some.
-
-   The recommendations mostly matched my expectations. High-Energy Pop favored Sunrise City, Chill Lofi favored Library Rain, and Deep Intense Rock favored Storm Runner because they matched the user's preferences. The Conflicting Sad Energy profile showed that genre and mood can outweigh energy, and songs with similar energy can still rank highly even if other features don't match.
-
-   After reducing the genre weight and doubling the energy weight, songs with similar energy ranked higher even when their genre or mood did not match. The top songs mostly stayed the same, but energy had a much stronger influence on the results. This made the recommendations different, but not always more accurate.
+The combination of recommendation explanations, retrieved knowledge, and confidence scoring makes the system easier to understand than the original project.
 
 ---
 
-## 8. Future Work  
+## 6. Limitations and Biases
 
-Ideas for how you would improve the model next.  
+Although the recommender performs well for this project, it has several limitations.
 
-Prompts:  
+- The dataset is relatively small.
+- The scoring algorithm relies heavily on genre, mood, and energy.
+- The RAG component uses simple keyword matching instead of semantic search.
+- Confidence scores are based on recommendation scores and should not be interpreted as prediction probabilities.
+- The recommender does not learn from previous user behavior or listening history.
+- Users with uncommon music preferences may receive less accurate recommendations because similar songs may not exist in the dataset.
 
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+---
+
+## 7. Evaluation
+
+The system was tested using several user profiles, including study, workout, and relaxation scenarios.
+
+Testing focused on verifying that:
+
+- Recommendations matched user preferences.
+- Retrieval returned relevant music knowledge.
+- Guardrails correctly rejected invalid inputs.
+- Recommendation requests were successfully logged.
+- Confidence scores were generated for every recommendation.
+
+One interesting discovery was that an earlier version of the retrieval system incorrectly returned study guidance for workout requests. Updating the keyword mapping significantly improved retrieval accuracy and overall recommendation quality.
+
+Overall, all reliability tests passed successfully.
+
+---
+
+## 8. Future Work
 
 If I continued this project, I would:
-- Add more songs, genres, and moods to improve recommendation variety.
-- Include additional features such as tempo, danceability, valence, favorite artists, and listening history.
-- Improve the explanations by showing a detailed breakdown of how each song earned its score.
-- Add diversity to the recommendations so similar songs do not always appear together.
+
+- Expand the music catalog with hundreds or thousands of songs.
+- Replace keyword retrieval with semantic search or vector embeddings.
+- Learn user preferences from listening history.
+- Include artist similarity, lyrics, and playlists.
+- Improve recommendation diversity.
+- Replace the rule-based scoring algorithm with a machine learning recommendation model.
 
 ---
 
-## 9. Personal Reflection  
+## 9. Responsible AI Reflection
 
-A few sentences about your experience.  
+### Limitations and Biases
 
-Prompts:  
+The recommender uses a relatively small dataset and a rule-based scoring system, so it cannot capture the full complexity of individual music preferences. It also relies on keyword-based retrieval instead of semantic search, which means some user requests may not retrieve the most relevant music knowledge.
 
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+### Potential Misuse
 
-This project helped me understand how recommendation systems compare user preferences with item features to generate personalized suggestions. I was surprised that a relatively simple scoring algorithm could still produce recommendations that felt reasonable. AI tools were helpful for brainstorming ideas, debugging code, and explaining concepts, but I still had to test everything myself to make sure it worked correctly. If I continued this project, I would build a larger dataset and experiment with more advanced recommendation techniques.
+Users might incorrectly assume that the recommender is as personalized as commercial streaming platforms. To reduce this risk, the project clearly documents that recommendations come from a limited local dataset and that confidence scores represent recommendation quality rather than certainty.
+
+### Reliability Testing
+
+During testing, I was surprised by how much the retrieval component improved recommendation explanations. I also learned that even small changes to retrieval rules could significantly affect the quality of the generated recommendations. Logging and guardrails made it much easier to identify and fix unexpected behavior.
+
+### Collaboration with AI
+
+AI served as a development assistant throughout this project. It helped explain programming concepts, debug Python code, improve documentation, and suggest new Applied AI features.
+
+One particularly helpful suggestion was implementing Retrieval-Augmented Generation (RAG) using a local music knowledge base. This significantly improved the explanations provided alongside each recommendation while satisfying the project requirements.
+
+One suggestion that turned out to be flawed was an early implementation of the retrieval function that matched keywords too broadly. During testing, workout-related requests incorrectly returned study-related music guidance. After identifying this issue through testing, I replaced the retrieval logic with a more accurate keyword-to-topic mapping, which resolved the problem.
 

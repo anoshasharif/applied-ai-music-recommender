@@ -131,6 +131,21 @@ def score_song(
 
     return round(score, 2), reasons
 
+def calculate_confidence(score: float, max_score: float = 6.5) -> int:
+    """
+    Converts a recommendation score into a confidence percentage.
+
+    The current scoring system has an approximate maximum score of 6.5.
+    The result is capped between 0 and 100.
+    """
+
+    if max_score <= 0:
+        return 0
+
+    confidence = round((score / max_score) * 100)
+
+    return max(0, min(confidence, 100))
+
 
 def recommend_songs(
     user_prefs: Dict,
